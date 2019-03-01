@@ -1,6 +1,7 @@
 [alias]
   amend = commit -a --amend
   ci = commit
+  cim = commit -m
   co = checkout
   cob = checkout -b
   current-branch = rev-parse --abbrev-ref HEAD
