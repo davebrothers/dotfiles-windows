@@ -44,7 +44,7 @@ Function vsCodeSettings {
   $settingsSyncInstalled = code --list-extensions | ? { $_ -eq $settingsSyncExtensionName }
 
   if (![String]::IsNullOrEmpty($settingsSyncInstalled)) {
-    Write-Host -ForegroundColor Yellow "VS Code Extension $settingsSyncExtensionName is installed.`nUse it to manage user settings.`n"
+    Write-Host -ForegroundColor Yellow "VS Code Extension $settingsSyncExtensionName is installed.`nUse it to manage VS Code user settings.`n"
   }
   else {
     Write-Host -ForegroundColor Yellow "Installing VS Code extension $settingsSyncExtensionName..."
@@ -56,8 +56,21 @@ if ($env:Path.ToLower().Contains("microsoft vs code")) {
   vsCodeSettings
 }
 else {
-  Write-Host -ForegroundColor Red "Could no find code in PATH. Either VS Code is not installed or has  not been added to your PATH."
+  Write-Host -ForegroundColor Red "Could not find code in PATH. Either VS Code is not installed or has  not been added to your PATH."
 }
+
+#################################
+#           ConEmu
+#    
+#################################
+$conEmuInstallPath = "C:\Program Files\ConEmu"
+if (Test-Path $conEmuInstallPath) {
+  Write-Host "ConEmu found at $($conEmuInstallPath).`nInstalling config..."
+  Copy-Item .\conemu\ConEmu.xml "$($conEmuInstallPath)\ConEmu.xml"
+} else {
+  Write-Host -ForegroundColor Yellow "Could not find ConEmu in C:\ProgramFiles.`nAre you using a portable installation?"
+}
+
 
 #################################
 #          POWERTOOLS
