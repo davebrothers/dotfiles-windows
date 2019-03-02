@@ -4,21 +4,6 @@
 #          .gitconfig
 #
 #################################
-
-if (!(Test-Path $HOME\.gitconfig)) {
-  copyGitConfig
-
-}
-else {
-  $gitconfigChoice = Read-Host "Global .gitconfig exists. Replace with dotfiles version? (Y/n)"
-  if ($gitconfigChoice -ne "n" -and $gitconfigChoice -ne "N") {
-    copyGitConfig
-  }
-  else {
-    Write-Host -ForegroundColor Yellow ".gitconfig will not be replaced.`n"
-  }
-}
-
 Function copyGitConfig {
   Write-Host -ForegroundColor Yellow "Copying global .gitconfig..."
   $gitUsername = Read-Host "Git username: "
@@ -35,17 +20,24 @@ Function copyGitConfig {
   }
 }
 
+if (!(Test-Path $HOME\.gitconfig)) {
+  copyGitConfig
+
+}
+else {
+  $gitconfigChoice = Read-Host "Global .gitconfig exists. Replace with dotfiles version? (Y/n)"
+  if ($gitconfigChoice -ne "n" -and $gitconfigChoice -ne "N") {
+    copyGitConfig
+  }
+  else {
+    Write-Host -ForegroundColor Yellow ".gitconfig will not be replaced.`n"
+  }
+}
+
 #################################
 #           VS CODE
 #    Shan.code-settings-sync
 #################################
-
-if ($env:Path.ToLower().Contains("microsoft vs code")) {
-  vsCodeSettings
-}
-else {
-  Write-Host -ForegroundColor Red "Could no find code in PATH. Either VS Code is not installed or has  not been added to your PATH."
-}
 
 Function vsCodeSettings {
   $settingsSyncExtensionName = "Shan.code-settings-sync"
@@ -60,15 +52,22 @@ Function vsCodeSettings {
   }
 }
 
+if ($env:Path.ToLower().Contains("microsoft vs code")) {
+  vsCodeSettings
+}
+else {
+  Write-Host -ForegroundColor Red "Could no find code in PATH. Either VS Code is not installed or has  not been added to your PATH."
+}
+
 #################################
 #          POWERTOOLS
 #    
 #################################
 $powertoolsInstallLocation = "$env:HOME\Documents\WindowsPowerShell"
 
-if (!Get-Module "davebrothers.powertools") {
+if (!(Get-Module "davebrothers.powertools")) {
   Write-Host -ForegroundColor Yellow "Could not find davebrothers.powertools."
-  $installPowerToolsChoice = Read-Host "Clone powertools into $powertoolsInstallLocation? (Y/n)"
+  $installPowerToolsChoice = Read-Host "Clone powertools into $($powertoolsInstallLocation)? (Y/n)"
   if ($installPowerToolsChoice -ne "N" -and $installPowerToolsChoice -ne "n") {
     if (Test-Path $powertoolsInstallLocation) {
       Remove-Item $powertoolsInstallLocation
