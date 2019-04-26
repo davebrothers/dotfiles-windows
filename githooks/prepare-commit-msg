@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Add Dave's current BG from Nightscout to commit message.
+
+bgval=$(curl -s 'https://deebsisnotwaiting.herokuapp.com/api/v1/entries/current.json' | sed -e 's/[{}]/''/g' | awk -v RS=',"' -F: '/^sgv/ {print $2}')
+if [ -z "$bgval" ]
+then
+  exit 0
+else
+  echo "[Dave's BG is $bgval]" >> $1
+fi

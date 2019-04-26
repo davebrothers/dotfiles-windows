@@ -1,0 +1,32 @@
+{
+    "window.zoomLevel": 0,
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "editor.fontFamily": "Fira Code, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "explorer.confirmDragAndDrop": false,
+    "html.format.wrapAttributes": "force-aligned",
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "javascript.preferences.quoteStyle": "double",
+    "typescript.preferences.quoteStyle": "double",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "sync.gist": "9fd944e8e245d895b0af80c09d1b0330",
+    "sync.quietSync": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "sync.forceDownload": false,
+    "zenMode.fullScreen": false,
+    "zenMode.restore": true,
+    "zenMode.hideTabs": false,
+    "editor.minimap.enabled": false,
+    "files.exclude": {
+      "node_modules/": true
+    },
+    "terminal.integrated.rendererType": "dom",
+    "prettier.jsxBracketSameLine": true,
+    "tslint.configFile": "./tslint.json",
+    "window.newWindowDimensions": "inherit"
+  }
+
