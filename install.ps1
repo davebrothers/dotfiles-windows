@@ -22,7 +22,6 @@ Function copyGitConfig {
 
 if (!(Test-Path $HOME\.gitconfig)) {
   copyGitConfig
-
 }
 else {
   $gitconfigChoice = Read-Host "Global .gitconfig exists. Replace with dotfiles version? (Y/n)"
@@ -33,6 +32,21 @@ else {
     Write-Host -ForegroundColor Yellow ".gitconfig will not be replaced.`n"
   }
 }
+
+#################################
+#          GIT HOOKS
+#    
+#################################
+try{
+  $hooksPath = $(git config --global --get core.hooksPath)
+  if ([String]::IsNullOrEmpty($hooksPath) -or !$hooksPath.Contains("dotfiles-windows")) {
+    $copyGitHooksChoice = Read-Host "git global core.hooksPath is not set to dotfiles-windows. Update config? (Y/n)"
+    if ($copyGitHooksChoice -ne "N" -and $copyGitHooksChoice -ne "n") {
+      $(git config --global core.hooksPath "$((Get-Item -Path .).FullName)\githooks")
+    }
+  }
+}
+catch {}
 
 #################################
 #           VS CODE
