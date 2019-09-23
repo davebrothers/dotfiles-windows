@@ -17,7 +17,14 @@
   editor = code --new-window --wait
 [diff]
   tool = vscode
-[difftool]
-  prompt = false
 [difftool "vscode"]
   cmd = code --new-window --wait --diff $LOCAL $REMOTE
+[merge]
+  tool = vscode
+[mergetool "vscode"]
+  cmd = code --wait $MERGED
+[user]
+  name = Dave Brothers
+  email = dave.brothers@milliken.com
+[core]
+	hooksPath = C:\\Users\\DB8929\\source\\repos\\dotfiles-windows\\githooks
