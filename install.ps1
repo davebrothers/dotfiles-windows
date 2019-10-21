@@ -37,7 +37,7 @@ else {
 #          GIT HOOKS
 #    
 #################################
-try{
+try {
   $hooksPath = $(git config --global --get core.hooksPath)
   if ([String]::IsNullOrEmpty($hooksPath) -or !$hooksPath.Contains("dotfiles-windows")) {
     $copyGitHooksChoice = Read-Host "git global core.hooksPath is not set to dotfiles-windows. Update config? (Y/n)"
@@ -46,7 +46,7 @@ try{
     }
   }
 }
-catch {}
+catch { }
 
 #################################
 #           VS CODE
@@ -81,7 +81,8 @@ $conEmuInstallPath = "C:\Program Files\ConEmu"
 if (Test-Path $conEmuInstallPath) {
   Write-Host "ConEmu found at $($conEmuInstallPath).`nInstalling config..."
   Copy-Item .\conemu\ConEmu.xml "$($conEmuInstallPath)\ConEmu.xml"
-} else {
+}
+else {
   Write-Host -ForegroundColor Yellow "Could not find ConEmu in C:\ProgramFiles.`nAre you using a portable installation?"
 }
 
@@ -90,15 +91,15 @@ if (Test-Path $conEmuInstallPath) {
 #          POWERTOOLS
 #    
 #################################
-$powertoolsInstallLocation = "$env:HOME\Documents\WindowsPowerShell"
+$psScriptHome = Join-Path $(Split-Path $PROFILE) Scripts
 
-if (!(Get-Module "davebrothers.powertools")) {
-  Write-Host -ForegroundColor Yellow "Could not find davebrothers.powertools."
-  $installPowerToolsChoice = Read-Host "Clone powertools into $($powertoolsInstallLocation)? (Y/n)"
-  if ($installPowerToolsChoice -ne "N" -and $installPowerToolsChoice -ne "n") {
-    if (Test-Path $powertoolsInstallLocation) {
-      Remove-Item $powertoolsInstallLocation
+if (!Test-Path $(Join-Path $psScriptHome davebrothers.powertools) {
+    Write-Host -ForegroundColor Yellow "Could not find davebrothers.powertools in $psScriptHome."
+    $installPowerToolsChoice = Read-Host "Clone powertools into $($psScriptHome)? (Y/n)"
+    if ($installPowerToolsChoice -ne "N" -and $installPowerToolsChoice -ne "n") {
+      if (Test-Path $(Join-Path $psScriptHome davebrothers.powertools)) {
+        Remove-Item $(Join-Path $psScriptHome davebrothers.powertools)
+      }
+      git clone git@github.com:davebrothers/PowerTools.git $psScriptHome davebrothers.powertools
     }
-    git clone git@github.com:davebrothers/PowerTools.git $powertoolsInstallLocation
   }
-}
