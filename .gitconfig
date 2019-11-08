@@ -25,6 +25,5 @@
   cmd = code --wait $MERGED
 [user]
   name = Dave Brothers
-  email = dave.brothers@milliken.com
 [core]
 	hooksPath = C:\\Users\\DB8929\\source\\repos\\dotfiles-windows\\githooks
