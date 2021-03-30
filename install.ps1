@@ -93,7 +93,7 @@ else {
 #################################
 $psScriptHome = Join-Path $(Split-Path $PROFILE) Scripts
 
-if (!Test-Path $(Join-Path $psScriptHome davebrothers.powertools) {
+if (-Not (Test-Path $(Join-Path $psScriptHome davebrothers.powertools))) {
     Write-Host -ForegroundColor Yellow "Could not find davebrothers.powertools in $psScriptHome."
     $installPowerToolsChoice = Read-Host "Clone powertools into $($psScriptHome)? (Y/n)"
     if ($installPowerToolsChoice -ne "N" -and $installPowerToolsChoice -ne "n") {
